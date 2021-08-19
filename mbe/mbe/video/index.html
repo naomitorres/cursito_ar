@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html>
-<script src="./lib/aframe-master.min.js"></script>
-<!-- we import arjs version without NFT but with marker + location based support -->
-<script src="./lib/aframe-ar.js"></script>
-<body style='margin : 0px; overflow: hidden;'>
-    <div class="arjs-loader">
-        <div>Loading, please wait...</div>
-    </div>
-    <a-scene
-        vr-mode-ui="enabled: false;"
-        renderer='antialias: true; alpha: true; precision: mediump;'
-        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
+  <script src="./lib/aframe-master.min.js"></script>
+  <!-- we import arjs version without NFT but with marker + location based support -->
+  <script src="./lib/aframe-ar.js"></script>
+  <body style="margin: 0px; overflow: hidden;">
+    <a-scene embedded arjs>
 
         <a-assets>
             <video src="mov_bbb.mp4"
@@ -18,18 +12,17 @@
                 crossorigin webkit-playsinline autoplay muted playsinline>
             </video>
         </a-assets>
-
-        <a-marker preset="hiro">
-            <a-video
-                src="#vid"
-                position='50 150 -100'
-                rotation='90 0 180'
-                width='300'
-                height='175'
-                >
-            </a-video>
-        </a-marker>
-		<a-entity camera></a-entity>
-	</a-scene>
-</body>
+      <a-marker preset="hiro">
+        <a-video
+        src="#vid"
+        position='50 150 -100'
+        rotation='90 0 180'
+        width='300'
+        height='175'
+        >
+    </a-video>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
 </html>
