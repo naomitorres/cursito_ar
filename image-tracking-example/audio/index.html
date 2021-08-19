@@ -31,37 +31,20 @@
    <div class="arjs-loader">
       <p>
          Now Loading...<br>
-         Please prepare the marker image :)
+         Please prepare the marker image :D
       </p>
    </div>
 
-   <a-scene
-   vr-mode-ui="enabled: false;"
-   renderer="logarithmicDepthBuffer: true;"
-   embedded
-   arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
-   >
-
+   <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;';>
     <a-assets>
-            <a-asset-item src="audio.mp3"
-                preload="false" id="sound" response-type="arraybuffer" loop
-                crossorigin webkit-playsinline autoplay="false" playsinline>
-            </a-asset-item>
-        </a-assets>
-        
-   <a-nft
-   type="nft"
-   url="https://naomitorres.github.io/cursito_ar/image-tracking-example/collage/collage"
-   smooth="true"
-   smoothCount="10"
-   smoothTolerance=".01"
-   smoothThreshold="5"
-   >
-
-   <a-sound src="#sound"></a-sound>
-
-</a-nft>
-<a-entity camera></a-entity>
+         <audio id="sound" src="audio.mp3" preload="auto"></audio>
+     </a-assets>
+     <a-marker preset="hiro">
+             <a-box position='0 0.5 0' material='color: black;' soundhandler> 
+             </a-box>
+     </a-marker>
+     <a-entity sound="src: #sound" autoplay="false"></a-entity>
+     <a-entity camera></a-entity>
 </a-scene>
 <script>
 
