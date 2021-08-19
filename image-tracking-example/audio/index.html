@@ -2,7 +2,8 @@
 
 <script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js'></script>
 <script>
-    AFRAME.registerComponent('soundhandler', {
+    
+    var play = AFRAME.registerComponent('soundhandler', {
         tick: function () {
                var entity = document.querySelector('[sound]');
              if (document.querySelector('a-marker').object3D.visible == true) {
@@ -13,6 +14,7 @@
     
          }
     });
+      
     </script>
 
 <style>
@@ -40,6 +42,7 @@
     <div class="arjs-loader">
         <div>Loading, please wait...</div>
     </div>
+    <button id="play">Play</button>
     <a-scene
         vr-mode-ui="enabled: false;"
         renderer='antialias: true; alpha: true; precision: mediump;'
