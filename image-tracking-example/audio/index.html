@@ -5,12 +5,17 @@
     
     var play = AFRAME.registerComponent('soundhandler', {
         tick: function () {
-               var entity = document.querySelector('[sound]');
+            var playthisvid_1 = document.querySelector('#playbutton_1');
+            var videoEl_1 = document.querySelector('#intro');
+            playthisvid_1.addEventListener('click', () => {
+                var entity = document.querySelector('[sound]');
              if (document.querySelector('a-marker').object3D.visible == true) {
                 entity.components.sound.playSound();
             } else {
                 entity.components.sound.pauseSound();
             }
+            })
+
     
          }
     });
@@ -61,5 +66,6 @@
 		<a-entity camera></a-entity>
 	</a-scene>
 
-    <button id="play">Play</button>
+    <a-image id="playbutton_1" class="clickable" position="-5 0 0" width="2" height="2" rotation="0 -90 0" soundhandler></a-image>
+
 </body>
