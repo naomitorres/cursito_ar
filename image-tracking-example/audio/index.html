@@ -1,71 +1,96 @@
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>Sample: AR.js with Image Tracking</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+   <script>
+    window.onload = function() {
+        AFRAME.registerComponent('shoundhandler', {
+            init: function () {
+                var marker = this.el;
 
-<script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js'></script>
-<script>
+                this.sound = document.querySelector("#sound");
+
+                marker.addEventListener('markerFound', function () {
+                    this.sound.play();
+                }.bind(this));
     
-    var play = AFRAME.registerComponent('soundhandler', {
-        tick: function () {
-            var playthisvid_1 = document.querySelector('#playbutton_1');
-            var videoEl_1 = document.querySelector('#intro');
-            playthisvid_1.addEventListener('click', () => {
-                var entity = document.querySelector('[sound]');
-             if (document.querySelector('a-marker').object3D.visible == true) {
-                entity.components.sound.playSound();
-            } else {
-                entity.components.sound.pauseSound();
+        marker.addEventListener('markerLost', function() {
+            this.sound.pause();
+            this.sound.currentTime = 0;
+        }.bind(this));
             }
-            })
+        });
+    };
+</script>
+</head>
+<body>
+   <div class="arjs-loader">
+      <p>
+         Now Loading...<br>
+         Please prepare the marker image :)
+      </p>
+   </div>
 
-    
-         }
-    });
-      
-    </script>
+   <a-scene
+   vr-mode-ui="enabled: false;"
+   renderer="logarithmicDepthBuffer: true;"
+   embedded
+   arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+   >
+
+    <a-assets>
+            <a-asset-item src="audio.mp3"
+                preload="false" id="sound" response-type="arraybuffer" loop
+                crossorigin webkit-playsinline autoplay="false" playsinline>
+            </a-asset-item>
+        </a-assets>
+        
+   <a-nft
+   type="nft"
+   url="https://naomitorres.github.io/cursito_ar/image-tracking-example/collage/collage"
+   smooth="true"
+   smoothCount="10"
+   smoothTolerance=".01"
+   smoothThreshold="5"
+   >
+
+   <a-sound src="#sound"></a-sound>
+
+</a-nft>
+<a-entity camera></a-entity>
+</a-scene>
+<script>
+
+
+</script>
 
 <style>
-    .arjs-loader {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .arjs-loader div {
-        text-align: center;
-        font-size: 1.25em;
-        color: white;
-    }
+body {
+   font-family: helvetica, arial, sans-serif;
+   margin: 0;
+   overflow: hidden;
+}
+.arjs-loader {
+   height: 100%;
+   width: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+   background-color: rgba(0, 0, 0, 0.8);
+   z-index: 9999;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.arjs-loader p {
+   text-align: center;
+   font-size: 1.25em;
+   color: white;
+}
 </style>
-
-<body style='margin : 0px; overflow: hidden;'>
-    <div class="arjs-loader">
-        <div>Loading, please wait...</div>
-    </div>
-    <a-scene
-        vr-mode-ui="enabled: false;"
-        renderer='antialias: true; alpha: true; precision: mediump;'
-        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
-    
-        <a-assets>
-            <audio id="sound" src="audio.mp3" preload="auto" position="0 2 5"></audio>
-        </a-assets>
-
-        <a-nft
-        soundhadler
-            type='nft' url="https://naomitorres.github.io/cursito_ar/image-tracking-example/collage/collage"
-            smooth="true" smoothCount="10" smoothTolerance="0.01" smoothThreshold="5"
-        >
-        <a-entity sound="src: #sound" autoplay="true"></a-entity>
-        </a-nft>
-		<a-entity camera></a-entity>
-	</a-scene>
-
-    <a-image id="playbutton_1" class="clickable" position="-5 0 0" width="2" height="2" rotation="0 -90 0" soundhandler></a-image>
-
 </body>
+</html>
